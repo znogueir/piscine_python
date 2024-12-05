@@ -1,10 +1,22 @@
 import sys
 
-if len(sys.argv) < 2:
-    print("AssertionError: one argument is required")
-elif len(sys.argv) > 2:
-    print("AssertionError: more than one argument is provided")
-elif not isinstance(int(sys.argv[1]), int):
-    print("AssertionError: argument is not an integer")
-else:
-    print("I'm Odd." if abs(int(sys.argv[1])) % 2 else "I'm Even.")
+sys.tracebacklimit = 0  # to limit the error prints to most recent error msg
+
+
+def whatis():
+    if len(sys.argv) < 2:
+        sys.exit()
+
+    assert len(sys.argv) == 2, "more than one argument is provided"
+    try:
+        n = int(sys.argv[1])
+    except ValueError:
+        n = None
+
+    assert n is not None, "argument is not an integer"
+
+    print("I'm Odd" if n % 2 else "I'm Even.")
+
+
+if __name__ == "__main__":
+    whatis()
