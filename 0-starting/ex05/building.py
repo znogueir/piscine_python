@@ -16,7 +16,7 @@ def process_input(s: str):
             content[1] += 1
         elif c.islower():
             content[2] += 1
-        elif c in " \n\r\t":
+        elif c == " " or c == "\n":
             content[4] += 1
         elif c.isdigit():
             content[5] += 1
@@ -47,6 +47,7 @@ def main(args: list):
     assert len(args) <= 2, "more than one argument provided"
 
     s = input("What is the text to count?\n") if len(args) == 1 else args[1]
+    print(s, "end")
     print_content(process_input(s))
 
 
