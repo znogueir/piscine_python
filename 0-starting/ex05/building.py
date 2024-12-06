@@ -1,54 +1,40 @@
 import sys
 
+sys.tracebacklimit = 0
 
-def process_input(s: str):
+
+def print_content(line: str):
     """
-    process_input(s: str):
-    Takes a string as a parameter.
-    Returns the number of different character types in it.
+    Takes a str as a parameter
+    Prints the number of different types of characters in it
+    Returns nothing
     """
+    types_nb = [0] * 4
+    types_comp = [str.isupper, str.islower, str.isspace, str.isdigit]
+    for i in range(4):
+        types_nb[i] = sum(map(types_comp[i], line))
 
-    content = [0] * 6
-
-    for c in s:
-        content[0] += 1
-        if c.isupper():
-            content[1] += 1
-        elif c.islower():
-            content[2] += 1
-        elif c == " " or c == "\n":
-            content[4] += 1
-        elif c.isdigit():
-            content[5] += 1
-        else:
-            content[3] += 1
-
-    return content
-
-
-def print_content(res: list):
-    """
-    print_content(res: list)
-    Takes a list as a parameter
-    Prints the content of the list formatted, returns nothing
-    """
-    print(f"The text contains {res[0]} characters:")
-    print(res[1], "upper letters")
-    print(res[2], "lower letters")
-    print(res[3], "punctuation marks")
-    print(res[4], "spaces")
-    print(res[5], "digits")
+    print(f"The text contains {len(line)} characters:")
+    print(f"{types_nb[0]} upper letters")
+    print(f"{types_nb[1]} lower letters")
+    print(f"{len(line) - sum(types_nb)} punctuation marks")
+    print(f"{types_nb[2]} spaces")
+    print(f"{types_nb[3]} digits")
 
 
 def main(args: list):
     """
-    Thats the main lol.
+    thats the main lol
     """
     assert len(args) <= 2, "more than one argument provided"
 
-    s = input("What is the text to count?\n") if len(args) == 1 else args[1]
-    print(s, "end")
-    print_content(process_input(s))
+    if len(args) < 2:
+        print("What is the text to count?")
+        line = sys.stdin.readline()
+    else:
+        line = args[1]
+
+    print_content(line)
 
 
 if __name__ == "__main__":
