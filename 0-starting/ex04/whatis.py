@@ -3,13 +3,13 @@ import sys
 sys.tracebacklimit = 0  # to limit the error prints to most recent error msg
 
 
-def whatis():
-    if len(sys.argv) < 2:
-        sys.exit()
+def whatis(args: list):
+    if len(args) < 2:
+        return
 
-    assert len(sys.argv) == 2, "more than one argument is provided"
+    assert len(args) == 2, "more than one argument is provided"
     try:
-        n = int(sys.argv[1])
+        n = int(args[1])
     except ValueError:
         n = None
 
@@ -19,4 +19,4 @@ def whatis():
 
 
 if __name__ == "__main__":
-    whatis()
+    whatis(sys.argv)
