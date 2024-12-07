@@ -5,6 +5,7 @@ sys.tracebacklimit = 0
 
 
 def main(args: list):
+    """Prints the words of a string that are longer than N"""
     assert len(args) == 3, "the arguments are bad"
 
     n = None
@@ -16,8 +17,7 @@ def main(args: list):
 
     s = args[1].split()
 
-    print([x for x in filterstring(s, lambda x: len(x) >= n)])
-    print([x for x in filterstring(s)])
+    print([x for x in filterstring(lambda x: len(x) >= n, s)])
 
 
 if __name__ == "__main__":

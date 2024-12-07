@@ -1,7 +1,5 @@
-def filterstring(it: list, cond=None):
+def filterstring(cond, it):
+    """TODO"""
     for x in it:
-        if not cond:
-            if x:
-                yield x
-        elif cond(x):
+        if not cond and x or cond and cond(x):
             yield x
