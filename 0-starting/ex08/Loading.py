@@ -11,20 +11,46 @@ def ft_tqdm(lst: range):
     """
     # get the length of the terminal
     columns, _ = os.get_terminal_size(0)
+
+    # get the number of elements in the range
     nbr_of_elems = lst[-1] + 1
-    # get the length of the loading bar :
-    # total length - eta string - 5
-    # if the length of loading bar is <= 0:
-    # set it to 1
-    percentage = ""  # "000%"
+
+    percentage = 0  # "000%"
     loading_bar = ""  # "|<progress = chars followed by spaces>|"
-    status_infos = ""  # " <i + 1/nbr of elems [time elapsed<estimated duration, <1 or 2 spaces><speed>it/s or s/it]"
+    status_infos = ""
+    elapsed_time = "--:--"
+    estimated_duration = "--:--"
+    speed = "0.00it/s"  # or s/it if ratio < 1.0
 
     for i in lst:
         # compose the percentage string
         percentage = int(round((i + 1) / nbr_of_elems * 100))
-        # compose the eta string
-        # pass
-        # output the complete loading bar
-        print(f"{percentage}%|{i}", end="\r")
+        percentage_str = str(percentage)
+        percentage_str = " " * (3 - len(percentage_str)) + percentage_str
+
+        # compose the status string
+        status_infos = (
+            f" {i + 1}/{nbr_of_elems} [{elapsed_time}<{estimated_duration}, {speed}]"
+        )
+
+        # get the length of the loading bar :
+        loading_bar_length = columns - len(status_infos) - 6
+        if loading_bar_length <= 0:
+            loading_bar_length = 1
+
+        # compute progress bar
+        progress_bar_length = int(percentage / 100.0 * loading_bar_length)
+
+        # assemble loading bar
+        loading_bar = "=" * progress_bar_length + " " * (
+            loading_bar_length - progress_bar_length
+        )
+
+        # display the complete loading bar
+        print(
+            f"{percentage_str}%|{loading_bar}|{status_infos}\r",
+            end="\r",
+        )
+
+        # yield current value ?
         yield i
