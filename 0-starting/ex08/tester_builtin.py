@@ -8,5 +8,5 @@ from Loading import ft_tqdm
 print()
 
 for elem in tqdm(range(10)):
-    sleep(2)
+    sleep(11)
 print()
