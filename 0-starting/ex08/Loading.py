@@ -1,44 +1,56 @@
-import os
-import time
-
-
-def render_percentage(progress: float):
-    """
-    Calcualtes the current progress as percentage.
-    Returns a string.
-    """
-    percentage = int(progress * 100)
-    percentage_str = str(percentage)
-    percentage_str = " " * (3 - len(percentage_str)) + percentage_str
-
-    return percentage_str
+from os import get_terminal_size
+from time import time
 
 
 def render_loading_bar(size: int, progress: float):
     """
-    Calculates the current progress bar.
+    Renders the current progress bar.
     Returns a string.
     """
+
     if size <= 0:
         size = 1
 
     progress_size = int(size * progress)
-    loading_bar = "=" * progress_size + " " * (size - progress_size)
+    bar = "=" * progress_size + " " * (size - progress_size)
 
-    return loading_bar
+    return bar
 
 
-def render_time_estimations(i: int, n: int, start_time: float, curr_time: float):
+def format_time_durations(seconds: float):
+    seconds = int(seconds)
+
+    hours = seconds // 3600
+    mins = seconds // 60
+    secs = seconds % 60
+
+    res = f"{int(mins):02d}:{int(secs):02d}"
+    if hours:
+        mins = (seconds % 3600) * 60
+        res = f"{int(hours):02d}:{res}"
+
+    return res
+
+
+def render_time_estimations(progress: float, i: int, n: int, start: float):
     """
-    Calculates the elapsed time, the estimated duration,
+    Calculates the elapsed time, the estimated remaining time,
     and the speed of progress.
     Returns a string."""
-    elapsed = 0
-    duration = None
-    speed_str = "?it/s"  # or s/it if ratio < 1.0
-    elapsed_str = "00:00"
+    if i == 0:
+        return f" 0/{n} [00:00<?,  ?it/s]"
 
-    status = f" {i + 1}/{n} [{elapsed_str}<{duration}, {speed_str}]"
+    curr_time = time()
+    elapsed = curr_time - start
+    speed = i / elapsed
+    unit = "it/s"
+    if speed < 1:
+        speed = elapsed / i
+        unit = "s/it"
+
+    elapsed_str = format_time_durations(elapsed)
+    remaining_str = format_time_durations(elapsed / progress - elapsed)
+    status = f" {i}/{n} [{elapsed_str}<{remaining_str}, {speed:>5.2f}{unit}]"
 
     return status
 
@@ -47,34 +59,24 @@ def ft_tqdm(lst: range):
     """
     Takes a range as a parameter,
     Displays a loading bar according to the range, with the speed
-    and estimated end time.
+    and estimated remaining time.
     Yields each number in the range.
     """
 
-    cols, _ = os.get_terminal_size(0)
+    cols, _ = get_terminal_size(0)
     n = lst[-1] + 1
 
-    start_time = time.time()
-    curr_time = None
-    elapsed = 0
+    start = time()
 
     for i in lst:
-        progress = (i + 1) / float(n)
+        progress = i / float(n) if i > 0 else 0
 
-        if curr_time is not None:
-            elapsed = curr_time - start_time
-        curr_time = time.time()
+        status = render_time_estimations(progress, i, n, start)
+        bar = render_loading_bar(cols - len(status) - 6, progress)
+        print(f"{int(round(progress * 100)):>3}%|{bar}|{status}\r", end="\r")
 
-        # render the 3 main elements of the bar
-        percentage = render_percentage(progress)
-        status = render_time_estimations(i, n, start_time, elapsed)
-        loading_bar = render_loading_bar(cols - len(status) - 6, progress)
-
-        # display the complete loading bar
-        print(
-            f"{percentage}%|{loading_bar}|{status}\r",
-            end="\r",
-        )
-
-        # yield current value ?
         yield i
+
+    status = render_time_estimations(1.0, i + 1, n, start)
+    bar = render_loading_bar(cols - len(status) - 6, 1.0)
+    print(f"100%|{bar}|{status}\r", end="\r")
