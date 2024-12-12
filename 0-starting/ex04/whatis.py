@@ -15,7 +15,7 @@ def whatis(args: list):
 
     assert n is not None, "argument is not an integer"
 
-    print("I'm Odd" if n % 2 else "I'm Even.")
+    print("I'm Odd." if n % 2 else "I'm Even.")
 
 
 if __name__ == "__main__":
