@@ -6,6 +6,7 @@ Zero = 0
 Empty = ""
 Fake = False
 
+
 NULL_not_found(Nothing)
 NULL_not_found(Garlic)
 NULL_not_found(Zero)
