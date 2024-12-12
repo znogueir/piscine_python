@@ -37,31 +37,38 @@ def format_test_result(stream: str, exp: str, res: str):
     # so im getting the index at which the strings differ here
     ind = find_split(exp, res)
 
-    expected = f'\nExpected {stream}:{GREEN}{" "*4+exp}{R}\n'
-    found = f'found: {GREEN}{" "*13+res[:ind]}{RED}{res[ind:]}{R}'
+    expected = (
+        f'\nExpected{stream}:{GREEN}{" "*(4 if stream else 11)+exp}{R}\n'
+    )
+    found = f'Found: {GREEN}{" "*13+res[:ind]}{RED}{res[ind:]}{R}'
 
     return expected + found
 
 
-def assert_tests(title: str, out: str, exp_out: str, err: str, exp_err: str):
+def assert_tests(
+    title: str, out: str, exp_out: str, err: str = None, exp_err: str = None
+):
     """
-    Takes a title in parameter, with the stdout, stderr of a program and
-    the expected stdout and expected stdout.
-    Checks if they differ, if so, throws an assertion error.
+    Parameters:
+    Title of the test, Output, Expected output, Error output (Optional),
+    Expected error output (Optional)
+
+    Checks if the outputs differ from the expected ones, if so,
+    throws an assertion error.
     Prints the results in a nice format.
     """
 
-    assert out == exp_out, format_test_result(
-        "stdout" if err else "", exp_out, out
-    )
-    if err:
-        assert err == exp_err, format_test_result("stderr", exp_err, err)
+    stdout = "" if err is None and exp_err is None else " stdout"
+
+    assert out == exp_out, format_test_result(stdout, exp_out, out)
+    if err is not None and exp_err is not None:
+        assert err == exp_err, format_test_result(" stderr", exp_err, err)
 
     print(title)
-    print(format_test_result("stdout" if err else "", exp_out, out))
-    if err:
-        print(format_test_result("stderr", exp_err, err))
-    print("====================================================")
+    print(format_test_result(stdout, exp_out, out))
+    if err is not None and exp_err is not None:
+        print(format_test_result(" stderr", exp_err, err))
+    print("==========================================================")
     print()
 
 

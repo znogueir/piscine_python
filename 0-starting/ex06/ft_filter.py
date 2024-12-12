@@ -6,6 +6,7 @@ sys.tracebacklimit = 0
 
 def main(args: list):
     """Prints the words of a string that are longer than N"""
+
     assert len(args) == 3, "the arguments are bad"
 
     n = None
