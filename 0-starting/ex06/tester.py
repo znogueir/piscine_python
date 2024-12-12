@@ -1,10 +1,12 @@
 from filterstring import filterstring
 from tester_utils import test_program, assert_tests
 
-# testing the function itself first
+# ========== testing the function itself first ===========
 assert_tests("Comparing Docstrings", filterstring.__doc__, filter.__doc__)
+# TODO: add tests for the function itself
 
-# testing the program now:
+
+# =============== testing the program now ================
 path = "ft_filter.py"
 
 # 2nd arg (N) is not an int
