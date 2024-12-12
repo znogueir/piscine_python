@@ -18,14 +18,10 @@ def loading_bar(size: int, prog: float):
 def format_time(seconds: float):
     seconds = int(seconds)
 
-    hours = seconds // 3600
-    mins = seconds // 60
-    secs = seconds % 60
+    hours, secs = divmod(seconds, 3600)
+    mins, secs = divmod(secs, 60)
 
-    res = f"{int(mins):02d}:{int(secs):02d}"
-    if hours:
-        mins = (seconds % 3600) * 60
-        res = f"{int(hours):02d}:{res}"
+    res = f"{f'{int(hours)}:' if hours else ''}{int(mins):02d}:{int(secs):02d}"
 
     return res
 

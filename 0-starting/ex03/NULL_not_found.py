@@ -7,10 +7,10 @@ p = {
 }
 
 
-def NULL_not_found(object: any) -> int:
-    t = type(object)
-    if t in p and object == p[t][1] or (isinstance(object, float) and object != object):
-        print(p[t][0], object, t)
+def NULL_not_found(obj: any) -> int:
+    t = type(obj)
+    if t in p and obj == p[t][1] or (isinstance(obj, float) and obj != obj):
+        print(p[t][0], obj, t)
         return 0
     print("Type not Found")
     return 1
