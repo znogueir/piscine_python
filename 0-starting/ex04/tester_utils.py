@@ -43,35 +43,29 @@ def format_test_result(stream: str, exp: str, res: str):
     return expected + found
 
 
-def assert_test(title: str, out: str, exp: str):
+def assert_tests(
+    title: str, out: str, exp_out: str, err: str = None, exp_err: str = None
+):
     """
-    Takes in a title in parameter, with an output and an
-    expected result.
-    Checks if they differ, if so, throws an assertion error.
-    Prints the results in a nice format.
-    """
-    assert exp == out, format_test_result("stdout", exp, out)
+    Parameters:
+    Title of the test, Output, Expected output, Error output (Optional),
+    Expected error output (Optional)
 
-    print(title)
-    print(format_test_result("stdout", exp, out))
-    print("====================================================")
-    print()
-
-
-def assert_outputs(title: str, out: str, exp_out: str, err: str, exp_err: str):
-    """
-    Takes a title in parameter, with the stdout, stderr of a program and
-    the expected stdout and expected stdout.
-    Checks if they differ, if so, throws an assertion error.
+    Checks if the outputs differ from the expected ones, if so,
+    throws an assertion error.
     Prints the results in a nice format.
     """
 
-    assert out == exp_out, format_test_result("stdout", exp_out, out)
-    assert err == exp_err, format_test_result("stderr", exp_err, err)
+    stdout = "" if err is None and exp_err is not None else "stdout"
+
+    assert out == exp_out, format_test_result(stdout, exp_out, out)
+    if err is not None and exp_err is not None:
+        assert err == exp_err, format_test_result("stderr", exp_err, err)
 
     print(title)
-    print(format_test_result("stdout", exp_out, out))
-    print(format_test_result("stderr", exp_err, err))
+    print(format_test_result(stdout, exp_out, out))
+    if err is not None and exp_err is not None:
+        print(format_test_result("stderr", exp_err, err))
     print("====================================================")
     print()
 
@@ -89,7 +83,7 @@ def test_program(script_path, args, exp_out, exp_err):
         text=True,
     )
 
-    assert_outputs(
+    assert_tests(
         f"Testing program with args: {args}",
         r.stdout,
         exp_out,

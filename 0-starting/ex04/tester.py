@@ -1,5 +1,6 @@
 from tester_utils import test_program
 
+
 path = "whatis.py"
 
 test_program(path, [], "", "")
@@ -13,19 +14,19 @@ test_program(
 )
 test_program(
     path,
-    ["whatis", ""],
+    ["", ""],
     "",
     "AssertionError: more than one argument is provided\n",
 )
 test_program(
     path,
-    ["whatis", "12", "14"],
+    ["12", "14"],
     "",
     "AssertionError: more than one argument is provided\n",
 )
 test_program(
     path,
-    ["whatis", "asdg", "14"],
+    ["asdg", "14"],
     "",
     "AssertionError: more than one argument is provided\n",
 )
