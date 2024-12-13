@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: example_package_znogueir
+Version: 0.0.1
+Summary: A small example package
+Author-email: zachary nogueira <zachary.nogueira@gmail.com>
+Project-URL: Homepage, https://githbu.com/pypa/sampleproject
+Project-URL: Issues, https://githbu.com/pypa/sampleproject/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Example Package
+
+This is a simple example package.
+
