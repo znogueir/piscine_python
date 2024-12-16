@@ -1,3 +1,5 @@
+from typing import Any
+
 p = {
     type(None): ["Nothing:", None],
     float: ["Cheese: ", float("NaN")],
@@ -7,7 +9,7 @@ p = {
 }
 
 
-def NULL_not_found(obj: any) -> int:
+def NULL_not_found(obj: Any) -> int:
     t = type(obj)
     if t in p and obj == p[t][1] or (isinstance(obj, float) and obj != obj):
         print(p[t][0], obj, t)
