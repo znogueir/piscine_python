@@ -5,6 +5,9 @@ sys.tracebacklimit = 0
 
 
 def main(args: list):
+    """
+    Translates a string into morse code and prints it.
+    """
     assert len(args) == 2, "the arguments are bad"
 
     for c in args[1]:

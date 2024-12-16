@@ -16,6 +16,14 @@ def loading_bar(size: int, prog: float):
 
 
 def format_time(seconds: float):
+    """
+    Takes a duration in seconds as parameter.
+    Returns it as a string in the following format:
+    MM:SS if the duration is under an hour.
+    If it is longer, the number of hours is prepended to the format above,
+    without limits to the number of digits.
+    """
+
     seconds = int(seconds)
 
     hours, secs = divmod(seconds, 3600)
