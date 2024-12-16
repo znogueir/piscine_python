@@ -3,7 +3,52 @@ from tester_utils import test_program, assert_tests
 
 # ========== testing the function itself first ===========
 assert_tests("Comparing Docstrings", filterstring.__doc__, filter.__doc__)
-# TODO: add tests for the function itself
+assert_tests(
+    f"filter function with args: {None, [1, 0, 0, 1, 1]}",
+    [x for x in filterstring(None, [1, 0, 0, 1, 1])],
+    [x for x in filter(None, [1, 0, 0, 1, 1])],
+)
+assert_tests(
+    f"filter function with args: {None, [True, False, False, True, True]}",
+    [x for x in filterstring(None, [True, False, False, True, True])],
+    [x for x in filter(None, [True, False, False, True, True])],
+)
+assert_tests(
+    f"filter function with args: {None, ["", "blabla", "hehe", ""]}",
+    [
+        x
+        for x in filterstring(
+            None,
+            ["", "blabla", "hehe", ""],
+        )
+    ],
+    [
+        x
+        for x in filter(
+            None,
+            ["", "blabla", "hehe", ""],
+        )
+    ],
+)
+assert_tests(
+    f"filter function with args: {'lambda x: x == 0', [1, 0, 0, 1, 1]}",
+    [x for x in filterstring(lambda x: x == 0, [1, 0, 0, 1, 1])],
+    [x for x in filter(lambda x: x == 0, [1, 0, 0, 1, 1])],
+)
+list = [
+    "4.2",
+    "42042",
+    "42 students are",
+    "im 24",
+    "hello world",
+    "4242",
+    "the best. #42",
+]
+assert_tests(
+    f"filter function with args: {'lambda x: x.count("42") == 1', list}",
+    [x for x in filterstring(lambda x: x.count("42") == 1, list)],
+    [x for x in filter(lambda x: x.count("42") == 1, list)],
+)
 
 
 # =============== testing the program now ================

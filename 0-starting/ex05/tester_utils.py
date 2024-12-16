@@ -27,10 +27,10 @@ def format_test_result(stream: str, exp: str, res: str):
     Returns a formatted string containing both, with some colors.
     """
 
-    # Im putting these in quotes cause it looks better.
-    # also you can see if a string is empty or full of spaces
-    exp = f'"{exp}"'
-    res = f'"{res}"'
+    # Im putting these in quotes if they already are strings, this
+    # way we can better differentiate outputs.
+    exp = f'"{exp}"' if isinstance(exp, str) else str(exp)
+    res = f'"{res}"' if isinstance(res, str) else str(res)
 
     # I wanted to make the output green until it differs with the
     # expected output, and then red.
@@ -60,11 +60,11 @@ def assert_tests(
 
     stdout = "" if err is None and exp_err is None else " stdout"
 
+    print(title)
     assert out == exp_out, format_test_result(stdout, exp_out, out)
     if err is not None and exp_err is not None:
         assert err == exp_err, format_test_result(" stderr", exp_err, err)
 
-    print(title)
     print(format_test_result(stdout, exp_out, out))
     if err is not None and exp_err is not None:
         print(format_test_result(" stderr", exp_err, err))
