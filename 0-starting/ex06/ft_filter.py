@@ -18,7 +18,7 @@ def main(args: list):
 
     s = args[1].split()
 
-    print([x for x in filterstring(lambda x: len(x) >= n, s)])
+    print([x for x in filterstring(lambda x: len(x) > n, s)])
 
 
 if __name__ == "__main__":
