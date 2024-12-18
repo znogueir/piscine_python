@@ -5,6 +5,6 @@ from Loading import ft_tqdm
 
 print("My ft_tqdm:")
 print()
-for elem in ft_tqdm(range(10)):
-    sleep(11)
+for elem in ft_tqdm(range(394)):
+    sleep(0.23)
 print()
