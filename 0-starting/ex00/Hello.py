@@ -4,7 +4,7 @@ ft_set = {"Hello", "tutu!"}
 ft_dict = {"Hello": "titi!"}
 
 # your code here
-#  we replace the value at index 1
+# we replace the value at index 1
 ft_list[1] = "World!"
 
 # ft_tuple[1] = "France!" # <- not possible

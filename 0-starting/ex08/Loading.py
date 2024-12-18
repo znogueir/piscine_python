@@ -57,9 +57,12 @@ def ft_tqdm(lst: range):
     Yields each number in the range.
     """
 
-    cols, _ = get_terminal_size(0)
-    n = lst[-1] + 1
+    n = len(lst)
+    if n == 0:
+        print("0it [00:00, ?it/s]")
+        return
 
+    cols, _ = get_terminal_size(0)
     start = time()
 
     for i in lst:
@@ -73,6 +76,6 @@ def ft_tqdm(lst: range):
 
         yield i
 
-    status = status_bar(1.0, i + 1, n, start)
+    status = status_bar(1.0, n, n, start)
     bar = loading_bar(cols - len(status) - 6, 1.0)
     print(f"100%|{bar}|{status}\r", end="\r")

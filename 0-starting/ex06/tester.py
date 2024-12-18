@@ -14,7 +14,7 @@ assert_tests(
     [x for x in filter(None, [True, False, False, True, True])],
 )
 assert_tests(
-    f"filter function with args: {None, ["", "blabla", "hehe", ""]}",
+    f"filter function with args: {None, ['', 'blabla', 'hehe', '']}",
     [
         x
         for x in filterstring(
@@ -45,7 +45,7 @@ list = [
     "the best. #42",
 ]
 assert_tests(
-    f"filter function with args: {'lambda x: x.count("42") == 1', list}",
+    f"filter function with args: {'lambda x: x.count(str(42)) == 1', list}",
     [x for x in filterstring(lambda x: x.count("42") == 1, list)],
     [x for x in filter(lambda x: x.count("42") == 1, list)],
 )
