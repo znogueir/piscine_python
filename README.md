@@ -1,3 +1,3 @@
-## 42-Piscine Python
+# Piscine Python
 
 An introduction to Python for Data Science.
