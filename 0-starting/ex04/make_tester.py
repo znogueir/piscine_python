@@ -1,7 +1,7 @@
 from tester_utils import test_program
 
 
-path = "whatis.py"
+path = "ex04/whatis.py"
 
 test_program(path, [], "", "")
 test_program(path, ["12"], "I'm Even.\n", "")

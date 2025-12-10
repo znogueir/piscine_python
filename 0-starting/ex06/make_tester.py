@@ -52,7 +52,7 @@ assert_tests(
 
 
 # =============== testing the program now ================
-path = "ft_filter.py"
+path = "ex06/ft_filter.py"
 
 # 2nd arg (N) is not an int
 test_program(
