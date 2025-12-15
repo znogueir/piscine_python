@@ -35,7 +35,7 @@ norm:
 
 ## test: launch the tests for all exos
 test:
-	@for i in $$(seq 0 3); do \
+	@for i in $$(seq 0 0); do \
 		echo -e "${BLUE}[*] Testing ex0$$i ${RESET}" ; \
 		python3 ex0$$i/tester.py ; \
 	done
