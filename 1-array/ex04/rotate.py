@@ -30,7 +30,7 @@ def zoom(img: np.ndarray) -> np.ndarray:
         print(str(e), file=sys.stderr)
 
     return None
- 
+
 
 def transpose_2d(arr: np.ndarray) -> np.ndarray:
     """

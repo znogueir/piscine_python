@@ -30,7 +30,7 @@ def zoom(img: np.ndarray) -> np.ndarray:
         print(str(e), file=sys.stderr)
 
     return None
- 
+
 
 def main():
     """
