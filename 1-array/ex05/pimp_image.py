@@ -11,14 +11,7 @@ def ft_invert(arr: np.ndarray) -> np.ndarray:
     :rtype: numpy.ndarray
     """
 
-    h, w, c = arr.shape
-    res = np.empty((h, w, c), dtype=arr.dtype)
-
-    for i in range(h):
-        for j in range(w):
-            res[i, j] = [255 - c for c in arr[i, j]]
-
-    return res
+    return 255 - arr
 
 
 def ft_red(arr: np.ndarray) -> np.ndarray:
@@ -31,13 +24,8 @@ def ft_red(arr: np.ndarray) -> np.ndarray:
     :rtype: numpy.ndarray
     """
 
-    h, w, c = arr.shape
-    res = np.empty((h, w, c), dtype=arr.dtype)
-
-    for i in range(h):
-        for j in range(w):
-            res[i, j] = [arr[i, j, 0], 0, 0]
-
+    res = arr.copy()
+    res[:, :, 1:] = 0
     return res
 
 def ft_green(arr: np.ndarray) -> np.ndarray:
@@ -50,13 +38,8 @@ def ft_green(arr: np.ndarray) -> np.ndarray:
     :rtype: numpy.ndarray
     """
 
-    h, w, c = arr.shape
-    res = np.empty((h, w, c), dtype=arr.dtype)
-
-    for i in range(h):
-        for j in range(w):
-            res[i, j] = [0, arr[i, j, 1], 0]
-
+    res = arr.copy()
+    res[:, :, ::2] = 0
     return res
 
 
@@ -70,13 +53,8 @@ def ft_blue(arr: np.ndarray) -> np.ndarray:
     :rtype: numpy.ndarray
     """
 
-    h, w, c = arr.shape
-    res = np.empty((h, w, c), dtype=arr.dtype)
-
-    for i in range(h):
-        for j in range(w):
-            res[i, j] = [0, 0, arr[i, j, 2]]
-
+    res = arr.copy()
+    res[:, :, :2] = 0
     return res
 
 
@@ -90,4 +68,8 @@ def ft_grey(arr: np.ndarray) -> np.ndarray:
     :rtype: numpy.ndarray
     """
 
-    return arr
+    res = np.dot(arr, [0.299, 0.587, 0.114]) # this results in a 2d array
+    # convert to int
+    res = np.clip(np.round(res), 0, 255).astype(np.uint8)
+    # convert it back into 3 color channels before returning
+    return np.stack((res, res, res), axis=-1)

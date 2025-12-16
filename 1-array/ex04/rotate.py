@@ -46,7 +46,7 @@ def transpose_2d(arr: np.ndarray) -> np.ndarray:
         raise ValueError("Expected a 2D array")
 
     h, w = arr.shape
-    res = np.empty((w, h), dtype=arr.dtype)
+    res = np.empty((w, h))
 
     for i in range(h):
         for j in range(w):
