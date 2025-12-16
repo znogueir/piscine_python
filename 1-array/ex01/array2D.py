@@ -1,4 +1,5 @@
-import sys, numpy
+import sys
+import numpy
 
 
 def slice_me(family: list, start: int, end: int) -> list:
@@ -25,4 +26,3 @@ def slice_me(family: list, start: int, end: int) -> list:
         print(str(e), file=sys.stderr)
 
     return []
-
