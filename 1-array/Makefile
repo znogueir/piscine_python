@@ -16,12 +16,12 @@ all: venv norm test
 ## venv: create the venv and install flake8
 venv:
 	@if [ ! -e "venv" ]; then \
-		echo -e "$(PINK)[...] creating python venv and installing flake8$(RESET)"; \
+		echo -e "$(PINK)[...] creating python venv and installing deps$(RESET)"; \
 		python3 -m venv venv && chmod 755 ./venv/ && \
 		echo -e "$(BLUE)[+] venv created!$(RESET)"; \
-		echo -e "$(PINK)[...] installing flake8$(RESET)"; \
-		. venv/bin/activate && pip install -q "flake8" && \
-		echo -e "$(GREEN)[*] flake8 installed!$(RESET)"; \
+		echo -e "$(PINK)[...] installing deps...$(RESET)"; \
+		. venv/bin/activate && pip install -r "requirements.txt" && \
+		echo -e "$(GREEN)[*] deps installed!$(RESET)"; \
 	fi
 
 ## norm: check the norm of all exo files
@@ -35,7 +35,7 @@ norm:
 
 ## test: launch the tests for all exos
 test:
-	@for i in $$(seq 0 0); do \
+	@for i in $$(seq 0 5); do \
 		echo -e "${BLUE}[*] Testing ex0$$i ${RESET}" ; \
 		python3 ex0$$i/tester.py ; \
 	done
