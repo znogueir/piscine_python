@@ -1,13 +1,37 @@
+import matplotlib.pyplot as plt
 from load_image import ft_load
-from pimp_image import ft_invert
+from pimp_image import ft_invert, ft_red, ft_green, ft_blue, ft_grey
 
 
 array = ft_load("landscape.jpg")
+if array is None:
+    print("Error: Encountered issue while loading.")
+    exit(1)
 
-ft_invert(array)
-ft_red(array)
-ft_green(array)
-ft_blue(array)
-ft_grey(array)
-
+print("# ==== Docstrings: ==== #")
 print(ft_invert.__doc__)
+print(ft_red.__doc__)
+print(ft_green.__doc__)
+print(ft_blue.__doc__)
+print(ft_grey.__doc__)
+
+print("# ==== Showing imgs ==== #")
+img = ft_invert(array)
+plt.imshow(img)
+plt.show()
+
+img = ft_red(array)
+plt.imshow(img)
+plt.show()
+
+img = ft_green(array)
+plt.imshow(img)
+plt.show()
+
+img = ft_blue(array)
+plt.imshow(img)
+plt.show()
+
+img = ft_grey(array)
+plt.imshow(img)
+plt.show()
