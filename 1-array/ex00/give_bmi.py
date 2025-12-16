@@ -33,7 +33,8 @@ def give_bmi(
 
     except Exception as e:
         print(str(e), file=sys.stderr)
-        return []
+
+    return None
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
@@ -62,4 +63,5 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
 
     except Exception as e:
         print(str(e), file=sys.stderr)
-        return []
+
+    return None

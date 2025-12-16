@@ -17,16 +17,17 @@ def ft_load(path: str) -> numpy.ndarray:
     try:
         if not path:
             raise ValueError("path is empty.")
+
         img = Image.open(path)
         if not img:
             raise ValueError("could not load image.")
 
         img = numpy.array(img)
-        # print the shape of the img array (h x l x 3)
-        # print the img as a numpy array of (h x l x 3)
+        print(f"The shape of the image is : {img.shape}")
+
         return img
 
     except Exception as e:
         print(str(e), file=sys.stderr)
 
-    return []
+    return None

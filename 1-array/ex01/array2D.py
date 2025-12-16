@@ -25,4 +25,4 @@ def slice_me(family: list, start: int, end: int) -> list:
     except Exception as e:
         print(str(e), file=sys.stderr)
 
-    return []
+    return None
