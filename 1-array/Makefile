@@ -35,9 +35,10 @@ norm:
 
 ## test: launch the tests for all exos
 test:
-	@for i in $$(seq 0 5); do \
+	@for i in $$(seq 0 2); do \
 		echo -e "${BLUE}[*] Testing ex0$$i ${RESET}" ; \
 		python3 ex0$$i/tester.py ; \
+		echo -e "\n${BLUE}[i] Test ex03 to ex05 manually :)${RESET}" ; \
 	done
 
 ## vclean: remove venv
