@@ -39,6 +39,9 @@ def main():
     """
 
     img = ft_load("animal.jpeg")
+    if img is None:
+        print("Error: Encountered issue during load.", file=sys.stderr)
+        return 1
     print(img)
 
     zoomed_img = zoom(img)
