@@ -32,6 +32,29 @@ def zoom(img: np.ndarray) -> np.ndarray:
     return None
  
 
+def transpose_2d(arr: np.ndarray) -> np.ndarray:
+    """
+    Transposes a 2 dimensional array.
+
+    :param arr: the arr to transpose
+    :type arr: numpy.ndarray
+    :return: the transposed arr
+    :rtype: numpy.ndarray
+    """
+
+    if arr.ndim != 2:
+        raise ValueError("Expected a 2D array")
+
+    h, w = arr.shape
+    res = np.empty((w, h), dtype=arr.dtype)
+
+    for i in range(h):
+        for j in range(w):
+            res[j, i] = arr[i, j]
+
+    return res
+
+
 def rotate(img: np.ndarray) -> np.ndarray:
     """
     Rotates an image.
@@ -43,9 +66,7 @@ def rotate(img: np.ndarray) -> np.ndarray:
     """
 
     try:
-        # rotate the img (90d counter clockwise)
-        # img = np.rot90(img, k=1)
-        img = np.transpose(img, k=1)
+        img = transpose_2d(img)
 
         print(f"New shape after Transpose: {img.shape}")
         print(img)
